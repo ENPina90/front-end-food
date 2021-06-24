@@ -10,8 +10,19 @@ html {
   font-family: 'Lato', 'Arial', sans-serif;
   /* if lato is unavaliable it picks Arial, if that unavb then it picks any san Serif */
   font-size: 20px;
+  font-weight: 300;
   text-rendering: optimizeLegibility;
   /* Tells browser to prefer legibility */
+}
+
+.clearfix {zoom: 1}
+.clearfix:after {
+  /* floats end up making elements with 0 height, so you must clear them after the element with clearfix */
+  content: '.';
+  clear: both;
+  display: block;
+  height: 0;
+  visibility: hidden;
 }
 
 /* ----------------------------------------------------------------- */
@@ -87,6 +98,7 @@ header {
   background-size: cover;
   background-position: center;
   height: 100vh;
+  background-attachment: fixed;
   /* Not fucking %! */
 }
 
@@ -153,12 +165,44 @@ header {
 /* Icons */
 /* ----------------------------------------------------------------- */
 
-ion-icon  {
+.icon-big {
   font-size: 350%;
   display: block;
   color: #e67e22;
   margin-bottom: 10px;
   --ionicon-stroke-width: 16px;
+}
+
+.icon-small {
+  color: #e67e22;
+  width: 30px;
+  text-align: center;
+  font-size: 32px;
+  margin-top: 5px;
+
+  /* 3 secrets to aligning text and icons */
+  line-height: 120%;
+  vertical-align: middle;
+  margin-top: -5px;
+}
+
+/* ----------------------------------------------------------------- */
+/* Links */
+/* ----------------------------------------------------------------- */
+
+a:link,
+a:visited {
+  color:#e67e22;
+  text-decoration: none;
+  padding-bottom: 1px;
+  border-bottom: 1px solid #e67e22;
+  transition: border-bottom 0.2s, color 0.2s;
+}
+
+a:hover,
+a:active {
+  color: #555;
+  border-bottom: 1px solid transparent;
 }
 
 /* ----------------------------------------------------------------- */
@@ -167,7 +211,9 @@ ion-icon  {
 
 /* defining the behavior of the default link and the visited link to be the same */
 .btn:link,
-.btn:visited {
+.btn:visited,
+input[type=submit] {
+  /* formats all submit inputs to look our main button  */
   display: inline-block;
   padding: 10px 30px;
   padding: 10px, 30px;
@@ -179,7 +225,8 @@ ion-icon  {
 }
 
 .btn-full:link,
-.btn-full:visited {
+.btn-full:visited,
+input[type=submit] {
   background-color: #e67e22;
   border: 1px solid #e67e22;
   color: #fff;
@@ -193,7 +240,9 @@ ion-icon  {
 }
 
 .btn:hover,
-.btn:active {
+.btn:active,
+input[type=submit]:hover,
+input[type=submit]:active {
   background-color: #cf6d17;
 }
 
@@ -210,8 +259,20 @@ ion-icon  {
 }
 
 /* ----------------------------------------------------------------- */
+/* Features */
+/* ----------------------------------------------------------------- */
+
+.section-features .long-copy {
+  margin-bottom: 30px;
+}
+
+/* ----------------------------------------------------------------- */
 /* Meals */
 /* ----------------------------------------------------------------- */
+
+.section-meals {
+  padding: 0;
+}
 
 .meals-showcase {
   list-style: none;
@@ -227,9 +288,298 @@ ion-icon  {
 .meal-photo {
   width: 100%;
   margin: 0;
+  overflow: hidden;
 }
 
 .meal-photo img {
+  opacity: 0.7;
   width: 100%;
   height: auto;
+  transform: scale(1.15);
+  transition: transform 0.5s, opacity 0.5s;
+  /* transition can handle multiple attributtes */
+  background-color: #000;
+}
+
+.meal-photo img:hover {
+  transform: scale(1.03);
+  /* 1.03 or any random number above 1 gets rid of white line on scaled image edges, for some unknown reason */
+  opacity: 1;
+}
+
+/* ----------------------------------------------------------------- */
+/* How it Works */
+/* ----------------------------------------------------------------- */
+
+.section-steps {
+  background-color: rgb(233, 233, 233);
+}
+
+.steps-box:first-child {
+  text-align: right;
+  padding: 3%;
+  margin-top: 30px;
+}
+
+.steps-box:last-child {
+  padding-left: 3%;
+  margin-top: 70px;
+}
+
+.app-screen {
+  width: 40%;
+}
+
+.works-step {
+  margin-bottom: 50px;
+}
+
+.works-step div {
+  color: #e67e22;
+  border: 2px solid #e67e22;
+  display: inline-block;
+  border-radius: 50%;
+  height: 50px;
+  width: 55px;
+  text-align: center;
+  padding: 5px;
+  float: left;
+  font-size: 150%;
+  margin-right: 25px;
+}
+
+.btn-app:link,
+.btn-app:visited {
+  border: 0;
+}
+
+.btn-app img {
+  height: 50px;
+  width: auto;
+  margin-right: 10px;
+}
+
+.works-step:last-of-type {
+  margin-bottom: 80px;
+}
+
+/* ----------------------------------------------------------------- */
+/* Cities */
+/* ----------------------------------------------------------------- */
+
+.box img {
+  width: 100%;
+  height: auto;
+}
+
+.city-feature {
+  margin: 5px;
+}
+
+
+/* ----------------------------------------------------------------- */
+/* Customers */
+/* ----------------------------------------------------------------- */
+
+.section-testimonials {
+  background-image: linear-gradient(rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.8)), url(/resources/css/img/back-customers.jpg);
+  background-size: cover;
+  color: white;
+  /* create image paralax */
+  background-attachment: fixed;
+}
+
+blockquote {
+  padding: 2%;
+  font-style: italic;
+  line-height: 145%;
+  position: relative;
+  margin-top: 40px;
+}
+
+/* Set an something before an element */
+blockquote:before {
+  content: "\201c";
+  font-size: 500%;
+  display: block;
+  /* if you make something absolute, you NEED to make the parent relative */
+  position: absolute;
+  top: -5px;
+  left: -5px;
+}
+
+cite {
+  font-size: 90%;
+  margin-top: 25px;
+  /* Best way to do break for an element is make it a block element, so it has its own line. */
+  display: block;
+}
+
+
+cite img{
+  height: 45px;
+  border-radius: 50%;
+  margin-right: 10px;
+  vertical-align: middle;
+}
+
+/* ----------------------------------------------------------------- */
+/* section-plans */
+/* ----------------------------------------------------------------- */
+
+.section-plans {
+  background-color: rgb(233, 233, 233);
+}
+
+.plan-box {
+  background-color: #fff;
+  border-radius: 5px;
+  width: 90%;
+  /* bbecause plan box is a child of col, and were telling to only fill 90%, it creates some nice natural margins */
+  margin-left: 5%;
+}
+
+.plan-box div {
+  padding: 15px;
+  border-bottom: 1px solid rgb(231, 231, 231);
+  box-shadow: 0 2px 2px rgb(247, 247, 247);
+}
+
+.plan-box div:first-child {
+  background-color: rgb(248, 248, 248);
+  border-top-right-radius: 5px;
+  border-top-left-radius: 5px;
+}
+
+.plan-box div:last-child {
+  /* selects the last div in plan box */
+  text-align: center;
+  border: 0;
+}
+
+.plan-price {
+  font-size: 300%;
+  margin-bottom: 10px;
+  font-weight: 100;
+  color: #e67e22
+}
+
+.plan-price span {
+  font-size: 30%;
+  font-weight: 300;
+}
+
+.plan-price-meal {
+  font-size: 80%;
+}
+
+.plan-box ul {
+  list-style: none;
+}
+
+.plan-box ul li {
+  padding: 5px 0;
+}
+
+/* ----------------------------------------------------------------- */
+/* FORM */
+/* ----------------------------------------------------------------- */
+
+.contact-form {
+  width: 60%;
+  margin: 0 auto;
+}
+
+input[type=text],
+input[type=email],
+/* selects only inputs with type text and email. */
+select,
+textarea {
+  width: 100%;
+  padding: 7px;
+  border-radius: 3px;
+  border: 1px solid #ccc;
+  /* change the border of the input bar */
+}
+
+input[type=checkbox] {
+  margin: 10px 5px 10px 0;
+}
+
+*:focus {
+  outline: none;
+  /* gets rid of the highlight that surrounds input elements when selected. */
+}
+
+
+/* ----------------------------------------------------------------- */
+/* Footer */
+/* ----------------------------------------------------------------- */
+
+footer {
+  background-color: #333;
+  padding: 40px;
+}
+
+.footer-nav {
+  list-style: none;
+  float: left;
+}
+
+.social-links {
+  list-style: none;
+  float: right;
+}
+
+.footer-nav li,
+.social-links li {
+  display: inline-block;
+  margin-right: 20px;
+}
+
+.footer-nav li:last-child {
+  margin-right: 0;
+}
+
+footer a:link,
+footer a:visited {
+  text-decoration: none;
+  border: 0;
+  color: #888;
+  transition: color 0.2s;
+}
+
+footer a:hover,
+footer a:hover {
+  color: #ddd;
+}
+
+footer p {
+  color: #888;
+  text-align: center;
+  font-size: 90%;
+  margin-top: 60px;
+}
+
+.social-links a:link
+.social-links a:visited {
+  font-size: 180%;
+}
+
+.fb,
+.twit,
+.inta {
+  transition: 0.2s;
+}
+
+.fb:hover {
+  color: #3b5998
+}
+
+.twit:hover {
+  color: #00aced
+}
+
+.insta:hover {
+  color: #517fa4
 }
